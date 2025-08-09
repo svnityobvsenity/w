@@ -1,0 +1,27 @@
+{
+  "name": "Fride - Discord-like Chat App",
+  "short_name": "Fride",
+  "description": "A single-server Discord-like app with real-time text, voice, and admin dashboard",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0B0C0E",
+  "theme_color": "#5865F2",
+  "orientation": "landscape-primary",
+  "icons": [
+    {
+      "src": "/icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["social", "communication", "productivity"],
+  "lang": "en",
+  "dir": "ltr"
+}

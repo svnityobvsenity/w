@@ -1,0 +1,29 @@
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "apps/web/package.json",
+      "use": "@vercel/next"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "/apps/web/$1"
+    }
+  ],
+  "env": {
+    "NEXT_PUBLIC_SUPABASE_URL": "@supabase_url",
+    "NEXT_PUBLIC_SUPABASE_ANON_KEY": "@supabase_anon_key",
+    "NEXT_PUBLIC_SIGNALING_SERVER_URL": "@signaling_server_url",
+    "NEXT_PUBLIC_APP_URL": "@app_url",
+    "NEXT_PUBLIC_API_URL": "@api_url",
+    "NEXT_PUBLIC_STUN_SERVERS": "@stun_servers",
+    "NEXT_PUBLIC_TURN_SERVERS": "@turn_servers"
+  },
+  "functions": {
+    "apps/web/app/api/**/*.ts": {
+      "maxDuration": 30
+    }
+  }
+}

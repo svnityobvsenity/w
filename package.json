@@ -1,0 +1,47 @@
+{
+  "name": "fride",
+  "version": "1.0.0",
+  "description": "A single-server Discord-like app with real-time text, voice, and admin dashboard",
+  "private": true,
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "dev": "concurrently \"npm run dev:web\" \"npm run dev:signaling\"",
+    "dev:web": "npm run dev --workspace=apps/web",
+    "dev:signaling": "npm run dev --workspace=apps/signaling",
+    "build": "npm run build --workspaces",
+    "build:web": "npm run build --workspace=apps/web",
+    "build:packages": "npm run build --workspace=packages/types && npm run build --workspace=packages/design",
+    "start": "npm run start --workspace=apps/web",
+    "lint": "npm run lint --workspaces",
+    "lint:fix": "npm run lint:fix --workspaces",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "test": "npm run test --workspaces",
+    "test:coverage": "npm run test:coverage --workspace=apps/web",
+    "db:migrate": "npm run db:migrate --workspace=apps/web",
+    "seed": "npm run seed --workspace=apps/web",
+    "install:all": "npm install && npm install --workspace=apps/web && npm install --workspace=apps/signaling && npm install --workspace=packages/types && npm install --workspace=packages/design",
+    "clean": "rm -rf node_modules apps/*/node_modules packages/*/node_modules",
+    "postinstall": "npm run install:all",
+    "prepare": "husky install"
+  },
+  "devDependencies": {
+    "concurrently": "8.2.2",
+    "prettier": "3.1.1",
+    "typescript": "5.3.3",
+    "eslint": "8.56.0",
+    "eslint-config-prettier": "9.1.0",
+    "eslint-plugin-prettier": "5.1.2",
+    "@typescript-eslint/eslint-plugin": "^6.0.0",
+    "@typescript-eslint/parser": "^6.0.0",
+    "husky": "8.0.3",
+    "lint-staged": "15.2.0"
+  },
+  "engines": {
+    "node": ">=18.0.0 <=20.0.0"
+  },
+  "packageManager": "npm@10.2.4"
+}
