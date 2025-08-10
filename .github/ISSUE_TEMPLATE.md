@@ -11,7 +11,7 @@
 <!-- Describe what you expected to happen -->
 
 ## Actual Behavior
-<!-- Describe what actually happened -->
+<!-- Descrbe what actually happened -->
 
 ## Environment
 - **OS**: [e.g., Windows 10, macOS 12, Ubuntu 20.04]
