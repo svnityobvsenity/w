@@ -18,8 +18,8 @@
     "postinstall": "echo 'Postinstall completed' && exit 0"
   },
   "dependencies": {
-    "@fride/ui": "workspace:*",
-    "@fride/utils": "workspace:*",
+    "@fride/ui": "file:../../packages/ui",
+    "@fride/utils": "file:../../packages/utils",
     "@supabase/supabase-js": "^2.39.0",
     "@supabase/auth-helpers-nextjs": "^0.8.7",
     "@supabase/auth-ui-react": "^0.4.6",
