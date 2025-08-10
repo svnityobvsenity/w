@@ -1,7 +1,9 @@
 'use client'
 
 import React, { useEffect, useRef, useState } from 'react'
-import { MessageBubble, MessageInput } from '@fride/ui'
+import { useAuthStore } from '../lib/auth'
+import { MessageBubble } from './ui/MessageBubble'
+import { MessageInput } from './ui/MessageInput'
 import { useAppStore } from '@/lib/store'
 import { supabase } from '@/lib/supabaseClient'
 import { useBroadcastChannel } from '@/hooks/useBroadcastChannel'

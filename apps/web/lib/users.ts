@@ -1,5 +1,5 @@
 import { supabase } from './supabaseClient'
-import { User, Role } from '@fride/types'
+import { User, Role } from './types'
 
 export class UserService {
   async getUsers(): Promise<User[]> {

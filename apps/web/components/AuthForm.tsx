@@ -1,9 +1,8 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
+import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
 import { Auth } from '@supabase/auth-ui-react'
 import { ThemeSupa } from '@supabase/auth-ui-shared'
-import { supabase } from '../lib/supabaseClient'
-import { useAuthStore } from '../lib/auth'
-import { Loading } from '@fride/ui'
+import { Loading } from './ui/Loading'
 
 interface AuthFormProps {
   onSuccess?: () => void

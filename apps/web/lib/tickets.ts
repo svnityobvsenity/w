@@ -1,5 +1,5 @@
 import { supabase } from './supabaseClient'
-import { Ticket, Message, User } from '@fride/types'
+import { Ticket, Message, User } from './types'
 
 export interface TicketWithDetails extends Ticket {
   user: User

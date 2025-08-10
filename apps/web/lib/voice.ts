@@ -1,4 +1,4 @@
-import { VoiceParticipant, VoiceRoom } from '@fride/types'
+import { VoiceParticipant, VoiceRoom } from './types'
 
 export interface VoiceConnection {
   peerConnection: RTCPeerConnection

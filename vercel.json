@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "buildCommand": "npm run build:packages && cd apps/web && npm install && NEXT_IGNORE_ESLINT=1 NEXT_DISABLE_TYPECHECK=1 next build || echo 'Build completed with warnings' && exit 0",
+  "buildCommand": "cd apps/web && npm install && next build",
   "devCommand": "cd apps/web && npm run dev",
   "framework": "nextjs",
   "routes": [
@@ -14,10 +14,7 @@
     }
   ],
   "env": {
-    "NODE_ENV": "production",
-    "VERCEL_ENV": "production",
-    "NEXT_IGNORE_ESLINT": "1",
-    "NEXT_DISABLE_TYPECHECK": "1"
+    "NODE_ENV": "production"
   },
   "regions": ["iad1"],
   "public": true,

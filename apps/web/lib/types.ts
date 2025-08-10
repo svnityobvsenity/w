@@ -1,3 +1,4 @@
+// Core application types
 export interface User {
   id: string
   email: string
@@ -102,7 +103,7 @@ export interface AuthState {
 }
 
 export interface AppState {
-  activeChannel: string | null
+  activeChannel: Channel | null
   channels: Channel[]
   messages: Record<string, Message[]>
   tickets: Ticket[]

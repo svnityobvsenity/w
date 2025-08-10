@@ -1,5 +1,5 @@
 import React from 'react'
-import { Loading } from '@fride/ui'
+import { Loading } from './ui/Loading'
 
 interface LoadingSpinnerProps {
   size?: 'sm' | 'md' | 'lg' | 'xl'

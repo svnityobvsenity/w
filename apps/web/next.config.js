@@ -1,20 +1,24 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  // Ignore TypeScript errors during build
-  typescript: {
-    ignoreBuildErrors: true,
+  // Production optimizations
+  output: 'standalone',
+  poweredByHeader: false,
+  
+  // Disable telemetry
+  telemetry: false,
+  
+  // Optimize images
+  images: {
+    unoptimized: true,
+    domains: ['supabase.co']
   },
-  // Ignore ESLint errors during build
-  eslint: {
-    ignoreDuringBuilds: true,
+  
+  // Environment variables
+  env: {
+    CUSTOM_KEY: process.env.CUSTOM_KEY,
   },
-  // Disable strict mode for easier development
-  reactStrictMode: false,
-  // Enable experimental features
-  experimental: {
-    appDir: true,
-  },
-  // Configure webpack to handle missing modules
+  
+  // Webpack optimizations
   webpack: (config, { isServer }) => {
     // Handle missing modules gracefully
     config.resolve.fallback = {
@@ -38,18 +42,6 @@ const nextConfig = {
     
     return config
   },
-  // Environment variables
-  env: {
-    CUSTOM_KEY: process.env.CUSTOM_KEY,
-  },
-  // Disable image optimization for faster builds
-  images: {
-    unoptimized: true,
-  },
-  // Output configuration
-  output: 'standalone',
-  // Disable telemetry
-  telemetry: false,
 }
 
 module.exports = nextConfig

@@ -1,5 +1,5 @@
 import { supabase } from './supabaseClient'
-import { Channel, User } from '@fride/types'
+import { Channel, User } from './types'
 
 export interface ChannelWithMembers extends Channel {
   members: User[]
