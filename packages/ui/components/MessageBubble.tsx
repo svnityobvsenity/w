@@ -1,7 +1,28 @@
 import React from 'react'
 import { cn } from '../../lib/utils'
 import Avatar from './Avatar'
-import type { Message, User } from '@fride/types'
+
+// Define Message interface locally for now
+interface Message {
+  id: string
+  content: string
+  channel_id: string
+  user_id: string
+  user: {
+    id: string
+    display_name: string
+    avatar_url?: string
+    status: 'online' | 'offline' | 'away' | 'dnd'
+    role: 'user' | 'moderator' | 'admin'
+  }
+  reply_to_id?: string
+  reply_to_message?: Message
+  attachments?: string[]
+  reactions?: any[]
+  edited_at?: string
+  created_at: string
+  updated_at: string
+}
 
 export interface MessageBubbleProps {
   message: Message

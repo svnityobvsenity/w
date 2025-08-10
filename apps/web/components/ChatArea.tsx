@@ -5,7 +5,7 @@ import { MessageBubble, MessageInput } from '@fride/ui'
 import { useAppStore } from '@/lib/store'
 import { supabase } from '@/lib/supabaseClient'
 import { useBroadcastChannel } from '@/hooks/useBroadcastChannel'
-import type { Message } from '@fride/types'
+import type { Message } from '@/lib/types'
 
 interface ChatAreaProps {
   selectedChannel: string | null
@@ -271,23 +271,16 @@ export default function ChatArea({ selectedChannel, selectedDM, user, className 
       {/* Message Input */}
       <div className="p-4 border-t border-background-quaternary">
         <MessageInput
-          onSendMessage={(content) => handleSendMessage(content, replyToMessage?.id)}
+          onSend={(content) => handleSendMessage(content, replyToMessage?.id)}
+          replyToMessage={replyToMessage ? {
+            id: replyToMessage.id,
+            content: replyToMessage.content,
+            username: replyToMessage.user.display_name
+          } : null}
+          onCancelReply={() => setReplyToMessage(null)}
           placeholder={replyToMessage ? `Reply to ${replyToMessage.user.display_name}...` : 'Type a message...'}
           disabled={false}
         />
-        {replyToMessage && (
-          <div className="mt-2 p-2 bg-background-tertiary rounded-md">
-            <p className="text-sm text-text-secondary">
-              Replying to {replyToMessage.user.display_name}: {replyToMessage.content}
-            </p>
-            <button
-              onClick={() => setReplyToMessage(null)}
-              className="text-xs text-accent-primary hover:text-accent-primary/80 mt-1"
-            >
-              Cancel reply
-            </button>
-          </div>
-        )}
       </div>
     </div>
   )

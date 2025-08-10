@@ -1,91 +1,65 @@
-import { createRouteHandlerClient } from '@supabase/auth-helpers-nextjs'
-import { cookies } from 'next/headers'
 import { NextResponse } from 'next/server'
 
 export async function GET(request: Request) {
-  const { searchParams } = new URL(request.url)
-  const channelId = searchParams.get('channelId')
-  
-  if (!channelId) {
-    return NextResponse.json({ error: 'Channel ID is required' }, { status: 400 })
-  }
+  // Stub implementation - returns mock voice connections
+  const mockVoiceConnections = [
+    {
+      id: 'voice-1',
+      channel_id: 'voice-general',
+      user_id: 'user-1',
+      user: {
+        id: 'user-1',
+        display_name: 'Voice User 1',
+        username: 'voiceuser1',
+        avatar_url: undefined,
+        role: 'user',
+      },
+      is_muted: false,
+      is_deafened: false,
+      is_speaking: false,
+      joined_at: new Date().toISOString(),
+    }
+  ]
 
-  const supabase = createRouteHandlerClient({ cookies })
-  
-  const { data: voiceRoom, error } = await supabase
-    .from('voice_rooms')
-    .select(`
-      *,
-      participants:voice_participants (
-        *,
-        users:user_id (
-          id,
-          display_name,
-          username,
-          avatar_url
-        )
-      )
-    `)
-    .eq('channel_id', channelId)
-    .single()
-
-  if (error && error.code !== 'PGRST116') {
-    return NextResponse.json({ error: error.message }, { status: 500 })
-  }
-
-  return NextResponse.json(voiceRoom || null)
+  return NextResponse.json({
+    success: true,
+    data: mockVoiceConnections,
+    message: 'Voice endpoint - using mock data'
+  })
 }
 
 export async function POST(request: Request) {
-  const supabase = createRouteHandlerClient({ cookies })
-  const { channel_id, user_id } = await request.json()
-
-  // Check if voice room exists
-  let { data: voiceRoom } = await supabase
-    .from('voice_rooms')
-    .select('*')
-    .eq('channel_id', channel_id)
-    .single()
-
-  if (!voiceRoom) {
-    // Create new voice room
-    const { data: newRoom, error: roomError } = await supabase
-      .from('voice_rooms')
-      .insert({ channel_id })
-      .select()
-      .single()
-
-    if (roomError) {
-      return NextResponse.json({ error: roomError.message }, { status: 500 })
+  try {
+    const body = await request.json()
+    
+    // Stub implementation - returns mock voice connection
+    const mockConnection = {
+      id: `voice-${Date.now()}`,
+      channel_id: body.channel_id || 'voice-general',
+      user_id: body.user_id || 'mock-user',
+      user: {
+        id: body.user_id || 'mock-user',
+        display_name: 'Mock Voice User',
+        username: 'mockvoiceuser',
+        avatar_url: undefined,
+        role: 'user',
+      },
+      is_muted: body.is_muted || false,
+      is_deafened: body.is_deafened || false,
+      is_speaking: body.is_speaking || false,
+      joined_at: new Date().toISOString(),
     }
-    voiceRoom = newRoom
-  }
 
-  // Add user to voice room
-  const { data: participant, error } = await supabase
-    .from('voice_participants')
-    .upsert({
-      voice_room_id: voiceRoom.id,
-      user_id,
-      is_muted: false,
-      is_deafened: false,
-      speaking: false,
-      volume: 100,
+    return NextResponse.json({
+      success: true,
+      data: mockConnection,
+      message: 'Voice connection created successfully (mock)'
     })
-    .select(`
-      *,
-      users:user_id (
-        id,
-        display_name,
-        username,
-        avatar_url
-      )
-    `)
-    .single()
-
-  if (error) {
-    return NextResponse.json({ error: error.message }, { status: 500 })
+  } catch (error) {
+    return NextResponse.json({
+      success: false,
+      error: 'Failed to create voice connection',
+      message: 'Voice POST endpoint - using mock data'
+    }, { status: 400 })
   }
-
-  return NextResponse.json(participant)
 }

@@ -1,5 +1,9 @@
 {
   "version": 2,
+  "buildCommand": "npm run build",
+  "devCommand": "npm run dev",
+  "installCommand": "npm install",
+  "framework": "nextjs",
   "builds": [
     {
       "src": "apps/web/package.json",
@@ -8,22 +12,26 @@
   ],
   "routes": [
     {
+      "src": "/api/(.*)",
+      "dest": "/apps/web/app/api/$1"
+    },
+    {
       "src": "/(.*)",
       "dest": "/apps/web/$1"
     }
   ],
   "env": {
-    "NEXT_PUBLIC_SUPABASE_URL": "@supabase_url",
-    "NEXT_PUBLIC_SUPABASE_ANON_KEY": "@supabase_anon_key",
-    "NEXT_PUBLIC_SIGNALING_SERVER_URL": "@signaling_server_url",
-    "NEXT_PUBLIC_APP_URL": "@app_url",
-    "NEXT_PUBLIC_API_URL": "@api_url",
-    "NEXT_PUBLIC_STUN_SERVERS": "@stun_servers",
-    "NEXT_PUBLIC_TURN_SERVERS": "@turn_servers"
+    "NODE_ENV": "production",
+    "VERCEL_ENV": "production"
   },
   "functions": {
     "apps/web/app/api/**/*.ts": {
       "maxDuration": 30
     }
+  },
+  "regions": ["iad1"],
+  "public": true,
+  "github": {
+    "silent": true
   }
 }

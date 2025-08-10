@@ -1,7 +1,7 @@
 import { create } from 'zustand'
 import { subscribeWithSelector } from 'zustand/middleware'
 import { supabase } from './supabaseClient'
-import type { User, Channel, Message, Ticket, VoiceConnection, AppState, AuthState } from '@fride/types'
+import type { User, Channel, Message, Ticket, VoiceConnection, AppState, AuthState } from './types'
 
 interface AppStore extends AppState {
   // Auth actions
